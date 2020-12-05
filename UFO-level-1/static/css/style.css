@@ -3,11 +3,16 @@
   font-family: Ubuntu, sans-serif;
 }
 
-html,
-body {
+body, html {
+  position: relative;
   height: 100%;
-  padding: 0;
+  padding: 20px;
   margin: 0;
+  background: black;
+  background-image: url("../images/nasa.jpg");
+  background-attachment: fixed;
+  background-position: bottom center;
+  background-size: cover;
 }
 
 /* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
@@ -60,11 +65,10 @@ body {
 
 .filters .panel-body {
   padding: 0;
+  background-color: aliceblue;
 }
 
-.filters {
-  margin-top: 10px;
-}
+
 
 select {
   display: block;
@@ -92,24 +96,14 @@ select {
   margin-top: 50px;
 }
 
-/* The styles for the parallax */
-.hero {
-  position: relative;
-  height: 550px;
-  padding: 20px;
-  margin: 0;
-  background: black;
-  background-image: url("../images/nasa.jpg");
-  background-attachment: fixed;
-  background-position: bottom center;
-  background-size: cover;
-}
+
+
 
 .hero h1 {
-  margin-top: 200px;
+  margin-top: 50px;
   font-size: 0.1rem;
   animation: title 1.2s forwards linear;
-  color: aquamarine;
+  color: rgb(100, 170, 220);
 }
 
 .hero p {
@@ -117,7 +111,7 @@ select {
   opacity: 0;
   animation: subtitle 1.2s forwards linear;
   animation-delay: 1.2s;
-  color: aquamarine;
+  color: rgb(100, 170, 220);
 }
 
 /* media queries which will only be activated at specific screen sizes */
@@ -150,9 +144,9 @@ select {
     content: " ";
     background: aliceblue;
   }
-
+  
   #table-area td {
-    font-size: 1.25em;
+    font-size: 1rem;
   }
 
   #table-area tbody td {
