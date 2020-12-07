@@ -1,10 +1,10 @@
 // date selector
 var dateControl = d3.select('#filter-dte');
 
-// date selector defualts
-dateControl.property('value', '2010-01-01');
-dateControl.property('min', '2010-01-01');
-dateControl.property('max', '2010-01-13');
+// date selector inital value & limits
+dateControl.property('value', '');
+dateControl.property('min', minDate(data));
+dateControl.property('max', maxDate(data));
 
 // table columns
 var columns = ['datetime', 'city', 'state', 'country', 'shape', 'durationMinutes', 'comments'];
@@ -15,35 +15,17 @@ var tbody = d3.select('tbody');
 // populate table with all data
 loadTable(data);
 
-// reference button & form
+// buttons & form
 var filterBtn = d3.select('#filter-btn');
 var form = d3.select('#filter-frm');
 var resetBtn = d3.select('#reset-btn');
 
-//  associate button & form events with an action 
+//  actions for buttons & form 
 filterBtn.on('click', getDate);
 form.on('submit', getDate);
 resetBtn.on('click', resetTable);
 
-// filter the table on the search date value
-function getDate() {
-    
-    // prevent page refresh
-    d3.event.preventDefault();
-    
-    // search date
-    var searchDate = new Date(dateControl.property('value'));
- 
-    // data subset
-    var filterData = data.filter( sightings => { return (
-        new Date(sightings.datetime).getFullYear() == searchDate.getFullYear() &&
-        new Date(sightings.datetime).getMonth() == searchDate.getMonth() &&
-        new Date(sightings.datetime).getDate() == searchDate.getDate()
-    ) } );
-
-    // populate table with filtered dataset
-    loadTable(filterData);
-};
+//-----------------------------------------------------------------------------------------------
 
 // populate the table
 function loadTable (someData) {
@@ -73,30 +55,104 @@ function loadTable (someData) {
     });
 }
 
+//-----------------------------------------------------------------------------------------------
+
+// filter the table on the search date value
+function getDate() {
+    
+    // prevent page refresh
+    d3.event.preventDefault();
+    
+    // search date
+    var searchDate = new Date(dateControl.property('value'));
+ 
+    // data subset
+    var filterData = data.filter( sightings => { return (
+        new Date(sightings.datetime).getFullYear() == searchDate.getFullYear() &&
+        new Date(sightings.datetime).getMonth() == searchDate.getMonth() &&
+        new Date(sightings.datetime).getDate() == searchDate.getDate()
+    ) } );
+
+    // populate table with filtered dataset
+    loadTable(filterData);
+};
+
+//-----------------------------------------------------------------------------------------------
+
 // reset table with all data
 function resetTable() { 
+    
+    // prevent page refresh 
     d3.event.preventDefault();
+
+    // load all data to table
     loadTable(data); 
+    
+    // date selector inital value blank
+    dateControl.property('value', '');
 }
 
+//-----------------------------------------------------------------------------------------------
 
 // adapted from: https://www.tutorialspoint.com/how-to-title-case-a-sentence-in-javascript
 function titleCase(string) {
+    
+    // split sentence
     var sentence = string.toLowerCase().split(' ');
+
+    // change first letter to uppercase
     for(var i = 0; i< sentence.length; i++){
        sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
     }
+
+    // return assembled sentence
     return sentence.join(' ');
 }
 
+//-----------------------------------------------------------------------------------------------
 
-
-
-
-minDate(data);
-// find earliest date in the data
+// find earliest date
 function minDate(someData) {
-    someData.forEach( sighting => { console.log( new Date(sighting.datetime) )  });
-    // console.log(`${mD.getFullYear()} - ${mD.getMonth() + 1} - ${0 + mD.getDate()}`);
-    // return mD;
+    
+    // initial value
+    var minD = new Date(someData[0].datetime);
+ 
+    // loop through data assigning lowest value
+    someData.forEach( sighting => { 
+        var thisDate = new Date(sighting.datetime);
+        if (minD > thisDate) { minD = thisDate }
+    });
+    
+    // strip date components
+    var y = minD.getFullYear();
+    var m = ('0' + (minD.getMonth() + 1) ).slice(-2);
+    var d = ('0' + minD.getDate()).slice(-2);
+
+    // return date in 'yyyy-mm-dd' format
+    return (`${y}-${m}-${d}`);
 }
+
+//-----------------------------------------------------------------------------------------------
+
+// find most recent date
+function maxDate(someData) {
+    
+    // initial value
+    var maxD = new Date(someData[0].datetime);
+    
+    // loop through data assigning highest value
+    someData.forEach( sighting => { 
+        var thisDate = new Date(sighting.datetime);
+        if (maxD < thisDate) { maxD = thisDate }
+    });
+
+    // strip date components
+    var y = maxD.getFullYear();
+    var m = ('0' + (maxD.getMonth() + 1) ).slice(-2);
+    var d = ('0' + maxD.getDate()).slice(-2);
+
+    // return date in 'yyyy-mm-dd' format
+    return (`${y}-${m}-${d}`);
+}
+
+//-----------------------------------------------------------------------------------------------

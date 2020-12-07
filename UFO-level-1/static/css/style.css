@@ -10,11 +10,6 @@ body, html {
   background-size: cover;
 }
 
-#searchDate {
-  font-size: 0.8rem;
-  width: 100%;
-}
-
 .wrapper {
   position: relative;
   min-height: 100%;
@@ -46,7 +41,6 @@ body, html {
   margin: 0;
 }
 
-
 .hero h1 {
   margin-top: 20px;
   font-size: 10rem;
@@ -57,14 +51,13 @@ body, html {
 .hero p {
   font-size: 2rem;
   opacity: 0;
+  padding-bottom: 50px;
   animation: subtitle 1.2s forwards linear;
   animation-delay: 1.2s;
   color: rgb(100, 170, 220);
 }
 
-tbody {
-  overflow-y: auto;
-}
+tbody {overflow-y: auto;}
 
 .filters .panel-body {
   padding: 10px;
@@ -77,26 +70,28 @@ tbody {
   margin: 5px;
 }
 
-
-/* Small devices (up to 768px) */
+ /* Small devices (up to 768px) */
 @media (max-width: 767.98px) {
-  .navbar-brand {font-size: 4rem;}
+  .navbar-brand, label, input, .btn {font-size: 2rem;}
+  #ufoImg { height: 3rem; width: auto;}
   .table th {font-size: 2rem; width: 100%;}
   .table {font-size: 1.6rem; width: 100%;}
 }
 
 /* Medium devices (768-992px) */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .navbar-brand  {font-size: 3rem;}
-  .table th {font-size: 1.75rem; width: 100%;}
-  .table {font-size: 1.2rem; width: 100%;}
+  .navbar-brand, label, input, .btn {font-size: 1.5rem;}
+  #ufoImg { height: 2.5rem; width: auto;}
+  .table th {font-size: 1.5rem; width: 100%;}
+  .table {font-size: 1.25rem; width: 100%;}
 }
 
 /* Large devices (992 and above) */
 @media (min-width: 992px) {
-  .navbar-brand {font-size: 1rem;}
+  .navbar-brand, label, input, .btn {font-size: 1rem;}
+  #ufoImg { height: 2rem; width: auto;}
   .table th {font-size: 1rem; width: 100%;}
-  .table {font-size: 0.8rem; width: 100%;}
+  .table {font-size: 0.75rem; width: 100%;}
 }
 
 /* keyframe animations - animate the title */
