@@ -61,7 +61,7 @@ function loadTable (someData) {
 
 //-----------------------------------------------------------------------------------------------
 
-// filter the table on the search date value
+// filter the table on the search criteria
 function getCriteria() {
     
     // prevent page refresh
@@ -70,7 +70,6 @@ function getCriteria() {
     // search criteria
     if ( dateSearch.property('value') == '') { var sDate = '' } 
     else { var sDate = new Date(dateSearch.property('value')); }
-
     var sCity = citySearch.property('value');
     var sState = stateSearch.property('value');
     var sCountry = countrySearch.property('value');
