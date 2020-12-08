@@ -1,10 +1,14 @@
-// date selector
-var dateControl = d3.select('#filter-dte');
+// search input elements
+var dateSearch = d3.select('#filter-date');
+var citySearch = d3.select('#filter-city');
+var stateSearch = d3.select('#filter-stte');
+var countrySearch = d3.select('#filter-cnty');
+var shapeSearch = d3.select('#filter-shpe');
 
-// date selector inital value & limits
-dateControl.property('value', '');
-dateControl.property('min', minDate(data));
-dateControl.property('max', maxDate(data));
+// initial values & limits
+dateSearch.property('value', '');
+dateSearch.property('min', minDate(data));
+dateSearch.property('max', maxDate(data));
 
 // table columns
 var columns = ['datetime', 'city', 'state', 'country', 'shape', 'durationMinutes', 'comments'];
@@ -21,8 +25,8 @@ var form = d3.select('#filter-frm');
 var resetBtn = d3.select('#reset-btn');
 
 //  actions for buttons & form 
-filterBtn.on('click', getDate);
-form.on('submit', getDate);
+filterBtn.on('click', getCriteria);
+form.on('submit', getCriteria);
 resetBtn.on('click', resetTable);
 
 //-----------------------------------------------------------------------------------------------
@@ -58,20 +62,31 @@ function loadTable (someData) {
 //-----------------------------------------------------------------------------------------------
 
 // filter the table on the search date value
-function getDate() {
+function getCriteria() {
     
     // prevent page refresh
     d3.event.preventDefault();
     
-    // search date
-    var searchDate = new Date(dateControl.property('value'));
- 
-    // data subset
-    var filterData = data.filter( sightings => { return (
-        new Date(sightings.datetime).getFullYear() == searchDate.getFullYear() &&
-        new Date(sightings.datetime).getMonth() == searchDate.getMonth() &&
-        new Date(sightings.datetime).getDate() == searchDate.getDate()
-    ) } );
+    // search criteria
+    if ( dateSearch.property('value') == '') { var sDate = '' } 
+    else { var sDate = new Date(dateSearch.property('value')); }
+
+    var sCity = citySearch.property('value');
+    var sState = stateSearch.property('value');
+    var sCountry = countrySearch.property('value');
+    var sShape = shapeSearch.property('value');
+
+    // filtered data
+    var filterData = data.filter( sightings => {  return ( 
+            ( sDate == '' ||
+              ( new Date(sightings.datetime).getFullYear() == sDate.getFullYear() &&
+                new Date(sightings.datetime).getMonth() == sDate.getMonth() &&
+                new Date(sightings.datetime).getDate() == sDate.getDate() ) ) &&
+            ( sightings.city.toLowerCase() == sCity.toLowerCase() || sCity == '') &&
+            ( sightings.state.toLowerCase() == sState.toLowerCase() || sState == '') &&
+            ( sightings.country.toLowerCase() == sCountry.toLowerCase() || sCountry == '') &&
+            ( sightings.shape.toLowerCase() == sShape.toLowerCase() || sShape == '')
+    )   }   );
 
     // populate table with filtered dataset
     loadTable(filterData);
@@ -89,7 +104,11 @@ function resetTable() {
     loadTable(data); 
     
     // date selector inital value blank
-    dateControl.property('value', '');
+    dateSearch.property('value', '');
+    citySearch.property('value', '');
+    stateSearch.property('value', '');
+    countrySearch.property('value', '');
+    shapeSearch.property('value', '');
 }
 
 //-----------------------------------------------------------------------------------------------
