@@ -17,15 +17,15 @@
 **Website for small screen**  
 <kbd><img style="margin-left:0px;border:0px solid blue;" 
      height='300' title="small"
-     src="./MarsMissions/screenshots/MarsMissions-small.png" /></kbd>
+     src="./UFO-level-2/static/images/ufo-l2-small.png" /></kbd>
 
 **Website for medium screen**  
 <kbd><img style="margin-left:0px;border:0px solid blue;" 
      height='300' title="medium"
-     src="./MarsMissions/screenshots/MarsMissions-medium.png" /></kbd>
+     src="./UFO-level-2/static/images/ufo-l2-medium.png" /></kbd>
 
 **Website for large screen**  
 <kbd><img style="margin-left:0px;border:0px solid blue;" 
      height='300' title="large"
-     src="./MarsMissions/screenshots/MarsMissions-large.png" /></kbd>
+     src="./UFO-level-2/static/images/ufo-l2-large.png" /></kbd>
 
