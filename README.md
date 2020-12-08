@@ -5,12 +5,10 @@
 <br><br>
 
 ---
-### Code
-- [jupyter](./MarsMissions/mars.ipynb) notebook used to develop scraping code.
-- [python](./MarsMissions/scrape_mars.py) app to scrape data for Flask.
-- [flask](./MarsMissions/app.py) app to render template.
-- [html](./MarsMissions/templates/index.html) template of website's main page.
-- [css](./MarsMissions/static/style.css) with style for template.
+### Code - level 1
+- [javascript](./UFO-level-1/static/js/app.js) app to render and filter table.
+- [html](./UFO-level-1/index.html) template for website.
+- [css](./UFO-level-1/static/css/style.css) with style for template.
 
 ---
 ### Screenshots
